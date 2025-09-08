@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 import 'package:genshin_calculator/data/leyline.dart';
 import 'package:genshin_calculator/data/xp_material.dart';
@@ -12,15 +13,19 @@ class CalculatorView extends StatefulWidget {
 }
 
 class _CalculatorViewState extends State<CalculatorView> {
-  @override
-  Widget build(BuildContext context) {
     String totalWhiteMat = "";
     String totalRedMat = "";
     String totalPurpleMat = "";
     String currentXP = "";
     String currentLevel = "";
     String desiredLevel = "";
+    String response = '';
+    String neededPurples = '';
+    String neededReds = '';
+    String neededWhites = '';
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Genshin Impact Calculator"),
@@ -76,16 +81,61 @@ class _CalculatorViewState extends State<CalculatorView> {
               },
             ),
             ElevatedButton(
-              onPressed: () {
-                // Logic to calculate required materials
-                // This is where you would implement the calculation logic
-              },
+              onPressed: calculateRequiredMaterials,
               child: const Text("Calculate"),
             ),
-            // Display results here
+            SizedBox(height: 48.0),
+            Text(response == '' ? "No calculation" : response),
+            Row(children: [
+              Expanded(
+                child: Text(
+                  neededPurples
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  neededReds
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  neededWhites
+                ),
+              ),
+            ]),
           ],
         ),
       ),
     );
+  }
+  
+void calculateRequiredMaterials() {
+  // FIX THIS!!!!!!!!!!
+  int neededPurplesInt = 0;
+  int neededRedsInt = 0;
+  int neededWhitesInt = 0;
+  num neededMaterialsVar = 0;
+  final int intCurrentXP = int.parse(currentXP);
+  final int intNeededXP = xpTable[int.parse(desiredLevel) - 1].total -  xpTable[int.parse(currentLevel) - 1].total;
+  final num finalAnswer = intNeededXP - intCurrentXP - (int.parse(totalPurpleMat) * 20000) - (int.parse(totalRedMat) * 5000) - (int.parse(totalWhiteMat) * 1000);
+  neededMaterialsVar = finalAnswer;
+  while (neededMaterialsVar > 20000) {
+    neededMaterialsVar -= 20000;
+    neededPurplesInt ++;
+  }
+  while (neededMaterialsVar > 5000 && neededMaterialsVar < 20000) {
+    neededMaterialsVar -= 5000;
+    neededRedsInt ++;
+  }
+  while (neededMaterialsVar >= 0 && neededMaterialsVar < 5000) {
+    neededMaterialsVar -= 1000;
+    neededWhitesInt ++;
+  }
+  setState(() {
+    finalAnswer <= 0 ? response = 'Farmed' : response = 'Not done';
+    neededPurples = neededPurplesInt.toString();
+    neededReds = neededRedsInt.toString();
+    neededWhites = neededWhitesInt.toString();
+    });
   }
 }
