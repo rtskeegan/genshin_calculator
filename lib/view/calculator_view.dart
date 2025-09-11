@@ -37,24 +37,27 @@ class _CalculatorViewState extends State<CalculatorView> {
           children: [
             Row(children: [
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   decoration: const InputDecoration(labelText: "Total Purple Materials"),
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalPurpleMat = value;
                   },
                 ),
               ),
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   decoration: const InputDecoration(labelText: "Total Red Materials"),
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalRedMat = value;
                   },
                 ),
               ),
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   decoration: const InputDecoration(labelText: "Total White Materials"),
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalWhiteMat = value;
                   },
@@ -62,30 +65,46 @@ class _CalculatorViewState extends State<CalculatorView> {
               ),
             ]),
             SizedBox(height: 48.0),
-            TextField(
-              decoration: const InputDecoration(labelText: "Current Level"),
-              onChanged: (value) {
-                currentLevel = value;
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: "Desired Level"),
-              onChanged: (value) {
-                desiredLevel = value;
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: "Current XP"),
-              onChanged: (value) {
-                currentXP = value;
-              },
-            ),
-            ElevatedButton(
-              onPressed: calculateRequiredMaterials,
-              child: const Text("Calculate"),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: "Current Level"),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          currentLevel = value;
+                        },
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: "Desired Level"),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          desiredLevel = value;
+                        },
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(labelText: "Current XP"),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          currentXP = value;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(minimumSize: Size(0, 125)),
+                    onPressed: calculateRequiredMaterials,
+                    child: const Text("Calculate"),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 48.0),
-            Text(response == '' ? "No calculation" : response),
+            Text(response == '' ? "Please enter your data and press calculate!" : response),
             Row(children: [
               Expanded(
                 child: Text(
