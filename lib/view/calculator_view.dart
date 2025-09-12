@@ -38,25 +38,27 @@ class _CalculatorViewState extends State<CalculatorView> {
             Row(children: [
               Expanded(
                 child: TextFormField(
-                  decoration: const InputDecoration(labelText: "Total Purple Materials"),
+                  decoration: InputDecoration(labelText: "Purple"),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalPurpleMat = value;
                   },
                 ),
               ),
+              Spacer(),
               Expanded(
                 child: TextFormField(
-                  decoration: const InputDecoration(labelText: "Total Red Materials"),
+                  decoration: const InputDecoration(labelText: "Red"),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalRedMat = value;
                   },
                 ),
               ),
+              Spacer(),
               Expanded(
                 child: TextFormField(
-                  decoration: const InputDecoration(labelText: "Total White Materials"),
+                  decoration: const InputDecoration(labelText: "White"),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     totalWhiteMat = value;
