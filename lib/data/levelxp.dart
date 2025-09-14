@@ -3,11 +3,7 @@ class LevelXp {
   final int toNext;
   final int total;
 
-  LevelXp({
-    required this.level,
-    required this.toNext,
-    required this.total,
-  });
+  LevelXp({required this.level, required this.toNext, required this.total});
 }
 
 final List<LevelXp> xpTable = [

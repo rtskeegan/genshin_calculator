@@ -2,10 +2,7 @@ class XpMaterial {
   final String name;
   final int amount;
 
-  XpMaterial({
-    required this.name,
-    required this.amount,
-  });
+  XpMaterial({required this.name, required this.amount});
 }
 
 final List<XpMaterial> xpMaterials = [
