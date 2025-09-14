@@ -113,18 +113,25 @@ class _CalculatorViewState extends State<CalculatorView> {
               ],
             ),
             SizedBox(height: 48.0),
-            Text(
-              response == ''
-                  ? "Please enter your data and press calculate!"
-                  : response,
+            Center(
+              child: Text(
+                response == ''
+                    ? "Please enter your data and press calculate!"
+                    : response,
+              ),
             ),
-            Column(
-              children: [
-                Text("Needed Purple Materials $neededPurples"),
-                Text("Needed Red Materials $neededReds"),
-                Text("Needed White Materials $neededWhites"),
-                Text("Maximum Amount of Leylines Needed $leylinesNeeded"),
-              ],
+            SizedBox(height: 48.0),
+            Center(
+              child: Card(
+                child: Column(
+                  children: [
+                    Text("Needed Purple Materials: $neededPurples"),
+                    Text("Needed Red Materials: $neededReds"),
+                    Text("Needed White Materials: $neededWhites"),
+                    Text("Maximum Leylines Needed: $leylinesNeeded"),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -168,7 +175,7 @@ class _CalculatorViewState extends State<CalculatorView> {
       neededPurplesInt,
     );
     setState(() {
-      finalAnswer <= 0 ? response = 'Farmed' : response = 'Not done';
+      finalAnswer <= 0 ? response = 'Farmed!' : response = 'Not farmed :(';
       neededPurples = neededPurplesInt.toString();
       neededReds = neededRedsInt.toString();
       neededWhites = neededWhitesInt.toString();
