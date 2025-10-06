@@ -25,10 +25,22 @@ class _CalculatorViewState extends State<CalculatorView> {
   String neededWhites = '';
   String leylinesNeeded = '';
 
+  Color darkColor = Color.fromRGBO(49, 54, 82, 1);
+  Color darkMedColor = Color.fromRGBO(90, 98, 125, 1);
+  Color medColor = Color.fromRGBO(142, 146, 171, 1);
+  Color lightColor = Color.fromRGBO(238, 238, 238, 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Genshin Impact Calculator")),
+      backgroundColor: darkColor,
+      appBar: AppBar(
+        title: Text(
+          "Genshin Impact Calculator",
+          style: TextStyle(color: lightColor),
+        ),
+        backgroundColor: darkColor,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -38,7 +50,11 @@ class _CalculatorViewState extends State<CalculatorView> {
               children: [
                 Expanded(
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: "Purple"),
+                    style: TextStyle(color: lightColor),
+                    decoration: InputDecoration(
+                      labelText: "Purple",
+                      labelStyle: TextStyle(color: lightColor),
+                    ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       totalPurpleMat = value;
@@ -48,7 +64,11 @@ class _CalculatorViewState extends State<CalculatorView> {
                 Spacer(),
                 Expanded(
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "Red"),
+                    style: TextStyle(color: lightColor),
+                    decoration: InputDecoration(
+                      labelText: "Red",
+                      labelStyle: TextStyle(color: lightColor),
+                    ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       totalRedMat = value;
@@ -58,7 +78,11 @@ class _CalculatorViewState extends State<CalculatorView> {
                 Spacer(),
                 Expanded(
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "White"),
+                    style: TextStyle(color: lightColor),
+                    decoration: InputDecoration(
+                      labelText: "White",
+                      labelStyle: TextStyle(color: lightColor),
+                    ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       totalWhiteMat = value;
@@ -74,8 +98,10 @@ class _CalculatorViewState extends State<CalculatorView> {
                   child: Column(
                     children: [
                       TextFormField(
-                        decoration: const InputDecoration(
+                        style: TextStyle(color: lightColor),
+                        decoration: InputDecoration(
                           labelText: "Current Level",
+                          labelStyle: TextStyle(color: lightColor),
                         ),
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -83,8 +109,10 @@ class _CalculatorViewState extends State<CalculatorView> {
                         },
                       ),
                       TextFormField(
-                        decoration: const InputDecoration(
+                        style: TextStyle(color: lightColor),
+                        decoration: InputDecoration(
                           labelText: "Desired Level",
+                          labelStyle: TextStyle(color: lightColor),
                         ),
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -92,8 +120,10 @@ class _CalculatorViewState extends State<CalculatorView> {
                         },
                       ),
                       TextFormField(
-                        decoration: const InputDecoration(
+                        style: TextStyle(color: lightColor),
+                        decoration: InputDecoration(
                           labelText: "Current XP",
+                          labelStyle: TextStyle(color: lightColor),
                         ),
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -105,9 +135,15 @@ class _CalculatorViewState extends State<CalculatorView> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(minimumSize: Size(0, 125)),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(0, 125),
+                      backgroundColor: medColor,
+                    ),
                     onPressed: calculateRequiredMaterials,
-                    child: const Text("Calculate"),
+                    child: Text(
+                      "Calculate",
+                      style: TextStyle(color: lightColor),
+                    ),
                   ),
                 ),
               ],
@@ -118,18 +154,40 @@ class _CalculatorViewState extends State<CalculatorView> {
                 response == ''
                     ? "Please enter your data and press calculate!"
                     : response,
+                style: TextStyle(color: lightColor),
               ),
             ),
             SizedBox(height: 48.0),
             Center(
-              child: Card(
-                child: Column(
-                  children: [
-                    Text("Needed Purple Materials: $neededPurples"),
-                    Text("Needed Red Materials: $neededReds"),
-                    Text("Needed White Materials: $neededWhites"),
-                    Text("Maximum Leylines Needed: $leylinesNeeded"),
-                  ],
+              child: SizedBox(
+                height: 320,
+                width: 300,
+                child: Card(
+                  color: darkMedColor,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 50),
+                      Text(
+                        "Needed Purple Materials: $neededPurples",
+                        style: TextStyle(color: lightColor),
+                      ),
+                      SizedBox(height: 50),
+                      Text(
+                        "Needed Red Materials: $neededReds",
+                        style: TextStyle(color: lightColor),
+                      ),
+                      SizedBox(height: 50),
+                      Text(
+                        "Needed White Materials: $neededWhites",
+                        style: TextStyle(color: lightColor),
+                      ),
+                      SizedBox(height: 50),
+                      Text(
+                        "Maximum Leylines Needed: $leylinesNeeded",
+                        style: TextStyle(color: lightColor),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -140,7 +198,6 @@ class _CalculatorViewState extends State<CalculatorView> {
   }
 
   void calculateRequiredMaterials() {
-    // FIX THIS!!!!!!!!!!
     int neededPurplesInt = 0;
     int neededRedsInt = 0;
     int neededWhitesInt = 0;
